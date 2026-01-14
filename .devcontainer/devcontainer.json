@@ -1,0 +1,85 @@
+{
+  "name": "Professional Python 3.12 (uv) Template",
+  // 1. 使用微软官方维护的镜像，更稳定且预装了非 root 用户 (vscode)
+  "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+
+  // 2. 利用 Features 添加通用工具（如 zsh, oh-my-zsh, git 等增强体验）
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshOhMyZsh": true,
+      "upgradePackages": true,
+      "username": "vscode"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.mypy-type-checker",
+        "charliermarsh.ruff",
+        "ms-toolsai.jupyter", // Jupyter 核心支持
+        "ms-toolsai.vscode-jupyter-slideshow",
+        "piotrpalarz.vscode-gitignore-generator",
+        "RoscoP.ActiveFileInStatusBar",
+        "streetsidesoftware.code-spell-checker",
+        "tamasfe.even-better-toml",
+        "GrapeCity.gc-excelviewer",
+        "donjayamanne.githistory",
+        "sugatoray.vscode-markdown-extension-pack",
+        "bierner.markdown-checkbox",
+        "bierner.markdown-emoji",
+        "bierner.markdown-footnotes",
+        "AlanWalk.markdown-navigation",
+        "shd101wyy.markdown-preview-enhanced",
+        "bierner.markdown-yaml-preamble",
+        "christian-kohler.path-intellisense",
+        "mechatroner.rainbow-csv",
+        "shakram02.bash-beautify",
+        "foxundermoon.shell-format",
+        "esbenp.prettier-vscode",
+        "inferrinizzard.prettier-sql-vscode",
+        "njpwerner.autodocstring" // 自动生成 Docstring，专业开发必备
+      ],
+      "settings": {
+        // 自动识别项目内的虚拟环境
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff", // 使用 Ruff 替代 Black，速度极快且包含 Lint
+        "python.analysis.typeCheckingMode": "basic",
+        "python.terminal.activateEnvInSelectedTerminal": true,
+        "jupyter.askForKernelRestart": false,
+        "[python]": {
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+            "source.fixAll": "explicit"
+          }
+        }
+      }
+    }
+  },
+
+  "remoteEnv": {
+    // 自动将 uv 路径加入环境变量，确保终端直接可用
+    "PATH": "${containerWorkspaceFolder}/.venv/bin:/home/vscode/.local/bin:${env:PATH}",
+    "UV_DEFAULT_INDEX": "https://mirrors.aliyun.com/pypi/simple/",
+    "UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.venv",
+    "UV_LINK_MODE": "copy"
+  },
+
+  // 3. 核心初始化逻辑：确保“开箱即用”
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+
+  "remoteUser": "vscode",
+
+  // 提升容器性能，尤其是文件系统监听
+  "runArgs": ["--init", "--security-opt", "seccomp=unconfined"],
+
+  // 保持工作区持久化（防止每次 Rebuild 都要重新装包，可选）
+  "mounts": [
+    "source=uv-cache,target=/home/vscode/.cache/uv,type=volume",
+    // 挂载宿主机的 SSH 目录到容器中
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+  ]
+}

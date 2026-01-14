@@ -1,0 +1,19 @@
+[project]
+name = "study-stat"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+    "mypy>=1.19.1",
+    "nbstripout>=0.8.2",
+    "ruff>=0.14.11",
+]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true
