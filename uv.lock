@@ -1265,6 +1265,15 @@ wheels = [
 ]
 
 [[package]]
+name = "statadict"
+version = "1.1.0"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple/" }
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/52/8b/e504b3d97916e661f4eb681047a4f921123bc3688c3930b7f9c4e162eb8b/statadict-1.1.0.tar.gz", hash = "sha256:6b804811b77c0acff213d5fc27484e75bb79ed492fd3a2a958ecb04b2d2592f3" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/51/03/eb50a0bafb5afabcae3efb57e0fdd477ff1016dddc6953727e46b34d6637/statadict-1.1.0-py3-none-any.whl", hash = "sha256:67d739f46cc9495c200126d59259243d11bdde35eba9b57b69ac85eeb8a7578f" },
+]
+
+[[package]]
 name = "statsmodels"
 version = "0.14.6"
 source = { registry = "https://mirrors.aliyun.com/pypi/simple/" }
@@ -1303,6 +1312,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "empiricaldist" },
+    { name = "statadict" },
     { name = "statsmodels" },
 ]
 
@@ -1317,6 +1327,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "empiricaldist", specifier = ">=0.9.0" },
+    { name = "statadict", specifier = ">=1.1.0" },
     { name = "statsmodels", specifier = ">=0.14.6" },
 ]
 
