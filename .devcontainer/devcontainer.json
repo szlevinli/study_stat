@@ -65,7 +65,8 @@
     "PATH": "${containerWorkspaceFolder}/.venv/bin:/home/vscode/.local/bin:${env:PATH}",
     "UV_DEFAULT_INDEX": "https://mirrors.aliyun.com/pypi/simple/",
     "UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.venv",
-    "UV_LINK_MODE": "copy"
+    "UV_LINK_MODE": "copy",
+    "MPLCONFIGDIR": "${containerWorkspaceFolder}/.cache/matplotlib"
   },
 
   // 3. 核心初始化逻辑：确保“开箱即用”
