@@ -9,6 +9,7 @@ dependencies = [
     "lxml>=6.0.2",
     "statadict>=1.1.0",
     "statsmodels>=0.14.6",
+    "tables>=3.10.2",
 ]
 
 [dependency-groups]
